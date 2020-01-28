@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html>
 	<head>
 		<title>{{.Title}}</title>
 		<meta charset="utf-8"/>
@@ -9,8 +9,8 @@
 		<div class="container">
 			<nav>
 				<ul>
-					{{range .Pages}}
-						<li><a href="{{.File}}" />{{.Title}}</a></li>
+					{{range .Menu}}
+						<li><a href="{{.Dest}}" />{{.Title}}</a></li>
 					{{end}}
 				</ul>
 			</nav>
