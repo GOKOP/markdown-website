@@ -21,7 +21,7 @@ func Get() Page {
 
 	page := Page {
 		Title:   "404 Not found",
-		Content: "<h1>404: Page not found</h1",
+		Content: "<h1>404: Page not found</h1>",
 		Menu:    nil,
 	}
 
