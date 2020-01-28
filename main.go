@@ -10,4 +10,10 @@ func main() {
 
 	fmt.Println(page.Title)
 	fmt.Println(page.Content)
+
+	for i,entry := range page.Menu {
+		fmt.Println(i)
+		fmt.Println("  "+entry.Title)
+		fmt.Println("  "+entry.Dest)
+	}
 }
