@@ -1,0 +1,95 @@
+html {
+	min-height: 100vh;
+}
+
+body {
+	min-height: inherit;
+	margin: 0;
+}
+
+.container {
+	min-height: inherit;
+	display: flex;
+}
+
+nav {
+	box-sizing: border-box;
+	width: 20%;
+	min-width: 6em;
+	min-height: inherit;
+	background-color: #222;
+	color: #ccc;
+	padding: 3% 0 3% 0;
+	font-size: 1.6em;
+	flex-grow: 1;
+}
+
+article {
+	box-sizing: border-box;
+	width: 80%;
+	min-height: inherit;
+	background-color: #eee;
+	padding: 5%;
+	color: black;
+	font-size: 1.3em;
+	flex-grow: 1;
+}
+
+article h1 {
+	font-size: 1.6em;
+}
+
+article h2 {
+	font-size: 1.2em;
+}
+
+footer {
+	width: 100%;
+	height: 8em;
+	background-color: black;
+	color: white;
+	text-align: center;
+	line-height: 8em;
+	font-size: 0.9em;
+}
+
+nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+nav li {
+	box-sizing: border-box;
+	width: 100%;
+	margin: 5% 0 5% 0;
+	background-color: #333;
+	text-align: center;
+}
+
+nav li:hover {
+	background-color: #444;
+}
+
+nav li a {
+	display: inline-block;
+	text-decoration: none;
+	color: white;
+	width: 100%;
+	height: 100%;
+	padding: 5% 0 5% 0;
+}
+
+nav li a:hover {
+	color: white;
+	text-decoration: none;
+}
+
+nav li a:visited {
+	color: white;
+	text-decoration: none;
+}
+
+article p {
+	text-align: justify;
+}
