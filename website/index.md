@@ -33,10 +33,11 @@ Nulla at placerat ligula, ac euismod magna.
 ## Some subtitle
 
 Interdum et malesuada fames ac ante ipsum primis in faucibus:
-- Etiam quis sollicitudin neque.
-- Pellentesque nec orci erat.
-- Nunc egestas consequat felis.
-- Sed eget bibendum lectus.
+
+* Etiam quis sollicitudin neque.
+* Pellentesque nec orci erat.
+* Nunc egestas consequat felis.
+* Sed eget bibendum lectus.
 
 Quisque sed dignissim nisl, et sollicitudin mi.
 Duis eu nibh nibh.
