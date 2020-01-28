@@ -19,32 +19,24 @@ type Page struct {
 	Menu []MenuEntry
 }
 
-func readTitle(path string) (string,error) {
-	file, err := os.Open(path)
-
-	if err != nil {
-		log.Print("Opening "+path+": "+err.Error())
-		return nil, err
-	}
+func readTitle(file *os.File) (string,error) {
 
 	reader     := bufio.NewReader(file)
 	title, err := reader.ReadString('\n') // read first line
 
-	file.Close()
-
 	if err != nil {
-		log.Print("Reading title from "+path+": "+err.Error())
-		return nil, err
+		return "", err
 	}
 
 	return title, nil
 }
 
-func (page *Page) addMenuEntry(path string) {
+func (page *Page) addMenuEntry(file *os.File, path string) {
 
-	title, err := readTitle(path)
+	title, err := readTitle(file)
 
 	if err != nil {
+		log.Print("Reading title from "+path+": "+err.Error())
 		return
 	}
 
@@ -56,7 +48,7 @@ func (page *Page) addMenuEntry(path string) {
 	page.Menu = append(page.Menu, entry)
 }
 
-func Get(pageName string) Page {
+func Get() Page {
 
 	page := Page {
 		Title:   "404 Not found",
@@ -74,12 +66,20 @@ func Get(pageName string) Page {
 			return nil
 		}
 
-		page.addMenuEntry(path)
+		file, err := os.Open(path)
+		if err != nil {
+			return err
+		}
+
+		page.addMenuEntry(file, path)
+
+		file.Close()
+
 		return nil
 	})
 
 	if err != nil {
-		log.Print("Traversing files: "+err.Error())
+		log.Print(err)
 	}
 
 	return page
