@@ -62,7 +62,7 @@ func Get() Page {
 			return err
 		}
 
-		if info.IsDir() {
+		if info.IsDir() || !strings.HasSuffix(path, ".md") {
 			return nil
 		}
 
