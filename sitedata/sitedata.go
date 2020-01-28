@@ -8,5 +8,6 @@ type MenuEntry struct {
 type Page struct {
 	Address string
 	Title   string
+	Content string
 	Menu []MenuEntry
 }
