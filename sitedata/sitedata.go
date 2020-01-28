@@ -22,6 +22,35 @@ type Page struct {
 	Menu []MenuEntry
 }
 
+func (page *Page) addMenuEntry(title string, path string) {
+
+	entry := MenuEntry {
+		Title: strings.TrimRight(title, "\n"),
+		Dest:  strings.TrimSuffix( filepath.Base(path), ".md" ),
+	}
+
+	page.Menu = append(page.Menu, entry)
+}
+
+func (page *Page) setData(title string, path string) {
+
+	markdown, err := readContent(path)
+
+	if err != nil {
+		page.setError()
+	}
+
+	html := blackfriday.Run(markdown)
+
+	page.Title   = title
+	page.Content = string(html)
+}
+
+func (page *Page) setError() {
+	page.Title   = "Error"
+	page.Content = "<h1>An error ocurred while retreiving contents of this page</h1>"
+}
+
 func readTitle(path string) (string, error) {
 
 	file, err := os.Open(path)
@@ -57,35 +86,6 @@ func readContent(path string) ([]byte, error) {
 	content    =  content[ endOfTitle+1 :]
 
 	return content, nil
-}
-
-func (page *Page) addMenuEntry(title string, path string) {
-
-	entry := MenuEntry {
-		Title: strings.TrimRight(title, "\n"),
-		Dest:  strings.TrimSuffix( filepath.Base(path), ".md" ),
-	}
-
-	page.Menu = append(page.Menu, entry)
-}
-
-func (page *Page) setData(title string, path string) {
-
-	markdown, err := readContent(path)
-
-	if err != nil {
-		page.setError()
-	}
-
-	html := blackfriday.Run(markdown)
-
-	page.Title   = title
-	page.Content = string(html)
-}
-
-func (page *Page) setError() {
-	page.Title   = "Error"
-	page.Content = "<h1>An error ocurred while retreiving contents of this page</h1>"
 }
 
 func Get(name string) Page {
