@@ -5,7 +5,10 @@ import (
 	"os"
 	"path/filepath"
 	"bufio"
+	"io/ioutil"
 	"strings"
+	"bytes"
+	"gopkg.in/russross/blackfriday.v2"
 )
 
 type MenuEntry struct {
@@ -41,11 +44,22 @@ func readTitle(path string) (string, error) {
 	return title, nil
 }
 
-func (page *Page) addMenuEntry(title string, path string) {
+func readContent(path string) ([]byte, error) {
 
-	if title == "" {
-		return
+	content, err := ioutil.ReadFile(path)
+
+	if err != nil {
+		log.Print("Reading content of "+path+": "+err.Error())
+		return nil, err
 	}
+
+	endOfTitle := bytes.IndexByte(content, '\n')
+	content    =  content[ endOfTitle+1 :]
+
+	return content, nil
+}
+
+func (page *Page) addMenuEntry(title string, path string) {
 
 	entry := MenuEntry {
 		Title: strings.TrimRight(title, "\n"),
@@ -55,7 +69,26 @@ func (page *Page) addMenuEntry(title string, path string) {
 	page.Menu = append(page.Menu, entry)
 }
 
-func Get() Page {
+func (page *Page) setData(title string, path string) {
+
+	markdown, err := readContent(path)
+
+	if err != nil {
+		page.setError()
+	}
+
+	html := blackfriday.Run(markdown)
+
+	page.Title   = title
+	page.Content = string(html)
+}
+
+func (page *Page) setError() {
+	page.Title   = "Error"
+	page.Content = "<h1>An error ocurred while retreiving contents of this page</h1>"
+}
+
+func Get(name string) Page {
 
 	page := Page {
 		Title:   "404 Not found",
@@ -73,10 +106,22 @@ func Get() Page {
 			return nil
 		}
 
+		targetPage := false
+		if strings.TrimSuffix( filepath.Base(path), ".md" ) == name {
+			targetPage = true
+		}
+
 		title, err := readTitle(path)
 
 		if err == nil {
 			page.addMenuEntry(title, path)
+
+			if targetPage {
+				page.setData(title, path)
+			}
+
+		} else if targetPage {
+			page.setError()
 		}
 
 		return nil

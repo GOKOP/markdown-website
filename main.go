@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	page := sitedata.Get()
+	page := sitedata.Get("index")
 
 	fmt.Println(page.Title)
 	fmt.Println(page.Content)
