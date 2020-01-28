@@ -19,12 +19,12 @@ type Page struct {
 	Menu []MenuEntry
 }
 
-func (page *Page) addMenuEntry(filePath string) {
+func (page *Page) addMenuEntry(path string) {
 
-	file, err := os.Open(filePath)
+	file, err := os.Open(path)
 
 	if err != nil {
-		log.Print("Opening "+filePath+": "+err.Error())
+		log.Print("Opening "+path+": "+err.Error())
 		return
 	}
 
@@ -34,18 +34,18 @@ func (page *Page) addMenuEntry(filePath string) {
 	file.Close()
 
 	if err != nil {
-		log.Print("Reading title from "+filePath+": "+err.Error())
+		log.Print("Reading title from "+path+": "+err.Error())
 	}
 
 	entry := MenuEntry {
 		Title: strings.TrimRight(title, "\n"),
-		Dest:  strings.TrimSuffix( filepath.Base(filePath), ".md" ),
+		Dest:  strings.TrimSuffix( filepath.Base(path), ".md" ),
 	}
 
 	page.Menu = append(page.Menu, entry)
 }
 
-func Get() Page {
+func Get(pageName string) Page {
 
 	page := Page {
 		Title:   "404 Not found",
