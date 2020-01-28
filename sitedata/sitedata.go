@@ -19,24 +19,31 @@ type Page struct {
 	Menu []MenuEntry
 }
 
-func readTitle(file *os.File) (string,error) {
+func readTitle(path string) (string, error) {
+
+	file, err := os.Open(path)
+
+	if err != nil {
+		log.Print("Opening "+path+": "+err.Error())
+		return "", err
+	}
 
 	reader     := bufio.NewReader(file)
 	title, err := reader.ReadString('\n') // read first line
 
+	file.Close()
+
 	if err != nil {
+		log.Print("Reading title from "+path+": "+err.Error())
 		return "", err
 	}
 
 	return title, nil
 }
 
-func (page *Page) addMenuEntry(file *os.File, path string) {
+func (page *Page) addMenuEntry(title string, path string) {
 
-	title, err := readTitle(file)
-
-	if err != nil {
-		log.Print("Reading title from "+path+": "+err.Error())
+	if title == "" {
 		return
 	}
 
@@ -66,14 +73,11 @@ func Get() Page {
 			return nil
 		}
 
-		file, err := os.Open(path)
-		if err != nil {
-			return err
+		title, err := readTitle(path)
+
+		if err == nil {
+			page.addMenuEntry(title, path)
 		}
-
-		page.addMenuEntry(file, path)
-
-		file.Close()
 
 		return nil
 	})
