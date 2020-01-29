@@ -6,12 +6,12 @@ The website is generated on request from a template so modifying it boils down t
 ## Obtaining and building
 You need properly configured Go installation.
 ```
-go get gopkg.in/russross/blackfriday.v2
-go get gopkg.in/yaml.v3
 go get github.com/GOKOP/markdown-website
 (in the project folder)
-go build
+go build -i
 ```
+
+You can also download precompiled binaries from [here](https://github.com/GOKOP/markdown-website/releases)
 
 ## Running
 Just launch the executable
