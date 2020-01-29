@@ -9,6 +9,7 @@ You need properly configured Go installation.
 go get gopkg.in/russross/blackfriday.v2
 go get gopkg.in/yaml.v3
 go get github.com/GOKOP/markdown-website
+(in the project folder)
 go build
 ```
 
@@ -19,7 +20,7 @@ Just launch the executable
 * `template.html` - Go template from which the site is generated. 
 	Every page of the site is built from the same template.
 	Default one is perfectly usable but you can change it as you want.
-	You should at least change the copyright notice in the footer.
+	(you should at least change the copyright notice in the footer)
 * `config.yaml` - configuration
 * `website/` - your markdown files go here.
 	Every file in one subpage and one entry in navigation menu.
