@@ -2,9 +2,11 @@ package main
 
 import (
 	"github.com/GOKOP/markdown-website/server"
+	"github.com/GOKOP/markdown-website/siteconfig"
 )
 
 func main() {
-	files := []string{"style.css"}
-	server.Serve(":8080", files)
+
+	config := siteconfig.Read("config.yaml")
+	server.Serve(":"+config.Port, config.Files)
 }
