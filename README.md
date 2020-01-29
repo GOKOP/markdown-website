@@ -23,7 +23,7 @@ Just launch the executable
 	(you should at least change the copyright notice in the footer)
 * `config.yaml` - configuration
 * `website/` - your markdown files go here.
-	Every file in one subpage and one entry in navigation menu.
+	Every file is one subpage and one entry in navigation menu.
 	Main page should be called `index.md`.
 	All files should have the `.md` extension.
 	First line of the file is page's tab title (the <title></title> one, you know) and doesn't appear in the page's content.
