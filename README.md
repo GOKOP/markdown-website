@@ -27,6 +27,7 @@ Just launch the executable
 	Main page should be called `index.md`.
 	All files should have the `.md` extension.
 	First line of the file is page's tab title (the <title></title> one, you know) and doesn't appear in the page's content.
+	All md files must have endlines formatted in Unix (LF) format. Windows (CR+LF) format breaks some stuff in Russ Ross's blackfriday which I use for markdown conversion.
 * `files/` - folder for all the other files you may need to serve, eg. CSS stylesheets.
 	You also need to add an entry in the config for each one of them.
 	This is for the purpose of not serving a filesystem to avoid vulnerabilites.
