@@ -12,6 +12,9 @@ go get github.com/GOKOP/markdown-website
 go build
 ```
 
+## Running
+Just launch the executable
+
 ## Files
 * `template.html` - Go template from which the site is generated. 
 	Every page of the site is built from the same template.
