@@ -19,7 +19,7 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 
 	page := sitedata.Get(pageName)
 
-	templ, err := template.ParseFiles("template/template.html")
+	templ, err := template.ParseFiles("template.html")
 
 	if err != nil {
 		log.Print("Reading html template: "+err.Error())
@@ -34,7 +34,7 @@ func createFileHandlers(files []string) {
 
 	for _,file := range files {
 		http.HandleFunc("/"+file, func(w http.ResponseWriter, r *http.Request) {
-			http.ServeFile(w, r, "template/"+file)
+			http.ServeFile(w, r, "files/"+file)
 		})
 	}
 }
