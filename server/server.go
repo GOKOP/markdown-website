@@ -12,7 +12,12 @@ import (
 func mainHandler(w http.ResponseWriter, r *http.Request) {
 
 	pageName := strings.Trim( r.URL.Path, "/" )
-	page     := sitedata.Get(pageName)
+
+	if pageName == "" {
+		pageName = "index"
+	}
+
+	page := sitedata.Get(pageName)
 
 	templ, err := template.ParseFiles("template/template.html")
 
