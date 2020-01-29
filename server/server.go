@@ -10,6 +10,7 @@ import (
 )
 
 func mainHandler(w http.ResponseWriter, r *http.Request) {
+
 	pageName := strings.Trim( r.URL.Path, "/" )
 	page     := sitedata.Get(pageName)
 
@@ -17,13 +18,15 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		log.Print("Reading html template: "+err.Error())
-		templ := template.Parse("<!DOCTYPE html><html>
-		                         <head><title>{{.Title}}</title></head>
-		                         <body><h1>Default template!</h1>
-		                         {{range .Menu}}<a href='{{.Dest}}'>{{.Title}}</a><br/>{{end}}<br/>
-		                         {{.Content}}</body>
-		                         </html>"
+		fmt.Fprintf(w, "<h1>Error while reading html template</h1>")
+		return
 	}
 
 	templ.Execute(w, page)
+}
+
+func Serve(port string) {
+
+	http.HandleFunc("/", mainHandler)
+	http.ListenAndServe(port, nil)
 }
