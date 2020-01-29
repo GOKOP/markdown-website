@@ -30,8 +30,18 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 	templ.Execute(w, page)
 }
 
-func Serve(port string) {
+func createFileHandlers(files []string) {
+
+	for _,file := range files {
+		http.HandleFunc("/"+file, func(w http.ResponseWriter, r *http.Request) {
+			http.ServeFile(w, r, "template/"+file)
+		})
+	}
+}
+
+func Serve(port string, files []string) {
 
 	http.HandleFunc("/", mainHandler)
+	createFileHandlers(files)
 	http.ListenAndServe(port, nil)
 }

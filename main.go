@@ -5,5 +5,6 @@ import (
 )
 
 func main() {
-	server.Serve(":8080")
+	files := []string{"style.css"}
+	server.Serve(":8080", files)
 }
