@@ -3,6 +3,21 @@
 markdown-website is a simple webserver serving a very minimalistic website based on markdown files.
 The website is generated on request from a template so modifying it boils down to editing .md files.
 
+## Features
+
+* **Simplistic website markdown** - Each markdown file is one page and one entry in the navigation menu.
+	Each page is generated from the same template, in the name of simplicity.
+* **Serving files** - If your website needs some CSS or background image, you can do that.
+	Currently however each file is served through a separate handler for the purpose of not serving a filesystem 
+	(to avoid unnecessary vulnerabilites)
+	so this program is not a very good option if you want image galeries or something like that.
+* **HTTPS** - you can serve your website on HTTP, HTTPS, both or neither.
+	If you choose neither then the program will exit.
+
+## Planned features
+
+* blog
+
 ## Obtaining and building
 You need properly configured Go installation.
 ```
