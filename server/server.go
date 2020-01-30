@@ -6,6 +6,7 @@ import (
 	"text/template"
 	"log"
 	"fmt"
+	"sync"
 	"github.com/GOKOP/markdown-website/sitedata"
 )
 
@@ -39,9 +40,24 @@ func createFileHandlers(files []string) {
 	}
 }
 
-func Serve(port string, files []string) {
+func HandlerSetup(files []string) {
 
 	http.HandleFunc("/", mainHandler)
 	createFileHandlers(files)
+}
+
+func Serve(port string, wait *sync.WaitGroup) {
+
+	defer wait.Done()
+
+	log.Print("Starting HTTP server on port"+port)
 	log.Fatal( http.ListenAndServe(port, nil) )
+}
+
+func ServeTLS(port string, cert string, key string, wait *sync.WaitGroup) {
+
+	defer wait.Done()
+
+	log.Print("Starting HTTPS server on port"+port)
+	log.Fatal( http.ListenAndServeTLS(port, cert, key, nil) )
 }

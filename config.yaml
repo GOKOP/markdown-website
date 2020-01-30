@@ -1,3 +1,13 @@
-port: 8080
+servehttp: true
+porthttp: 8080
+
+servehttps: false
+porthttps: 8181
+
+# TLS certificate for HTTPS
+certfile: 
+keyfile: 
+
+# Files that you want to serve in addition to the generated html
 files:
     - style.css

@@ -7,7 +7,12 @@ import (
 )
 
 type Config struct {
-	Port string
+	ServeHttp bool
+	PortHttp  string
+	ServeHttps bool
+	PortHttps string
+	CertFile string
+	KeyFile string
 	Files []string
 }
 
