@@ -93,3 +93,9 @@ nav li a:visited {
 article p {
 	text-align: justify;
 }
+
+article blockquote {
+	background-color: #ddd;
+	padding: 0.5em 1em 0.5em 1em;
+	border-radius: 0.5em;
+}
