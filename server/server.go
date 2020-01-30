@@ -1,6 +1,7 @@
 package server
 
 import (
+	"net"
 	"net/http"
 	"strings"
 	"text/template"
@@ -44,6 +45,45 @@ func HandlerSetup(files []string) {
 
 	http.HandleFunc("/", mainHandler)
 	createFileHandlers(files)
+}
+
+type HttpsRedirect struct {
+	HttpsPort string
+}
+
+func (red HttpsRedirect) handler(w http.ResponseWriter, r *http.Request) {
+
+	host := r.Host
+
+	if strings.Contains(r.Host, ":") {
+		splitHost, _, err := net.SplitHostPort(r.Host)
+		host = splitHost
+
+		if err != nil {
+			log.Print("HTTPS redirection: Failed to separate host from port;", err.Error())
+			return
+		}
+	}
+
+	if red.HttpsPort == "443" {
+		red.HttpsPort = ""
+	}
+
+	target := "https://" + host + ":" + red.HttpsPort + r.URL.Path
+	http.Redirect(w, r, target, http.StatusPermanentRedirect) // 307
+}
+
+func RedirectToHttps(httpPort string, httpsPort string, wait *sync.WaitGroup) {
+
+	defer wait.Done()
+
+	redirect := HttpsRedirect {
+		HttpsPort: httpsPort,
+	}
+
+	log.Print("Redirecting HTTP on port ", httpPort, " to HTTPS on port ", httpsPort)
+	http.ListenAndServe(":"+httpPort, http.HandlerFunc(redirect.handler))
+
 }
 
 func Serve(port string, wait *sync.WaitGroup) {

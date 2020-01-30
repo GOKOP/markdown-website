@@ -17,6 +17,9 @@ func main() {
 	if config.ServeHttp {
 		wait.Add(1)
 		go server.Serve(":"+config.PortHttp, &wait)
+	} else {
+		wait.Add(1)
+		go server.RedirectToHttps(config.PortHttp, config.PortHttps, &wait)
 	}
 
 	if config.ServeHttps {

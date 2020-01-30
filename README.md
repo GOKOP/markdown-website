@@ -12,6 +12,7 @@ The website is generated on request from a template so modifying it boils down t
 	(to avoid unnecessary vulnerabilites)
 	so this program is not a very good option if you want image galeries or something like that.
 * **HTTPS** - you can serve your website on HTTP, HTTPS, both or neither.
+	If you choose to only serve on HTTPS, HTTP port will be used to redirect connections to HTTPS.
 	If you choose neither then the program will exit.
 
 ## Planned features
