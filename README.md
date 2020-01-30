@@ -4,6 +4,7 @@
 
 markdown-website is a simple webserver serving a very minimalistic website based on markdown files.
 The website is generated on request from a template so modifying it boils down to editing .md files.
+(this readme kinda makes it look like a bigger deal than it actually is)
 
 ## Features
 
@@ -22,7 +23,7 @@ The website is generated on request from a template so modifying it boils down t
 * blog
 
 ## Obtaining and building
-You need properly configured Go installation.
+To build you need properly configured Go installation.
 ```
 go get github.com/GOKOP/markdown-website
 (in the project folder)
