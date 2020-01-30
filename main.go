@@ -16,7 +16,7 @@ func main() {
 
 	if config.ServeHttp {
 		wait.Add(1)
-		go server.Serve(":"+config.PortHttp, &wait)
+		go server.Serve(config.PortHttp, &wait)
 	} else {
 		wait.Add(1)
 		go server.RedirectToHttps(config.PortHttp, config.PortHttps, &wait)
@@ -24,7 +24,7 @@ func main() {
 
 	if config.ServeHttps {
 		wait.Add(1)
-		go server.ServeTLS(":"+config.PortHttps, config.CertFile, config.KeyFile, &wait)
+		go server.ServeTLS(config.PortHttps, config.CertFile, config.KeyFile, &wait)
 	}
 
 	wait.Wait()
