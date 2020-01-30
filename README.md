@@ -30,7 +30,7 @@ go build -i
 You can also download precompiled binaries from [here](https://github.com/GOKOP/markdown-website/releases)
 
 ## Running
-Just launch the executable
+Just launch the executable (you may want to redirect its output to some file in case of some failure)
 
 ## Files
 * `template.html` - Go template from which the site is generated. 
