@@ -43,5 +43,5 @@ func Serve(port string, files []string) {
 
 	http.HandleFunc("/", mainHandler)
 	createFileHandlers(files)
-	http.ListenAndServe(port, nil)
+	log.Fatal( http.ListenAndServe(port, nil) )
 }
