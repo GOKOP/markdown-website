@@ -13,13 +13,14 @@ func main() {
 	server.HandlerSetup(config.Files)
 
 	var wait sync.WaitGroup
-	wait.Add(2)
 
 	if config.ServeHttp {
+		wait.Add(1)
 		go server.Serve(":"+config.PortHttp, &wait)
 	}
 
 	if config.ServeHttps {
+		wait.Add(1)
 		go server.ServeTLS(":"+config.PortHttps, config.CertFile, config.KeyFile, &wait)
 	}
 
