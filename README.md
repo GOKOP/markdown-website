@@ -1,5 +1,7 @@
 # markdown-website
 
+*current version is 1.1*
+
 markdown-website is a simple webserver serving a very minimalistic website based on markdown files.
 The website is generated on request from a template so modifying it boils down to editing .md files.
 
