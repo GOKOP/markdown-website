@@ -4,6 +4,10 @@ porthttp: 8080
 servehttps: false
 porthttps: 8181
 
+# option takes effect only when servehttp is set to false and servehttps is set to true
+# "temporary" (302), "permanent" (301) or "none"
+httpsredirect: temporary
+
 # TLS certificate for HTTPS
 certfile: 
 keyfile: 

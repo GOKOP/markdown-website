@@ -49,6 +49,7 @@ func HandlerSetup(files []string) {
 
 type HttpsRedirect struct {
 	HttpsPort string
+	Code int
 }
 
 func (red HttpsRedirect) handler(w http.ResponseWriter, r *http.Request) {
@@ -70,18 +71,31 @@ func (red HttpsRedirect) handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	target := "https://" + host + ":" + red.HttpsPort + r.URL.Path
-	http.Redirect(w, r, target, http.StatusPermanentRedirect)
+	http.Redirect(w, r, target, red.Code)
 }
 
-func RedirectToHttps(httpPort string, httpsPort string, wait *sync.WaitGroup) {
+func RedirectToHttps(httpPort string, httpsPort string, redirectType string, wait *sync.WaitGroup) {
 
 	defer wait.Done()
 
-	redirect := HttpsRedirect {
-		HttpsPort: httpsPort,
+	var redirectCode int
+
+	if redirectType == "temporary" {
+		redirectCode = http.StatusFound
+
+	} else if redirectType == "permanent" {
+		redirectCode = http.StatusMovedPermanently
+
+	} else {
+		log.Fatal("Unknown redirection type")
 	}
 
-	log.Print("Redirecting HTTP on port ", httpPort, " to HTTPS on port ", httpsPort)
+	redirect := HttpsRedirect {
+		HttpsPort: httpsPort,
+		Code: redirectCode,
+	}
+
+	log.Print("Redirecting HTTP on port ", httpPort, " to HTTPS on port ", httpsPort, " (status ", redirectCode, ")")
 	http.ListenAndServe(":"+httpPort, http.HandlerFunc(redirect.handler))
 
 }

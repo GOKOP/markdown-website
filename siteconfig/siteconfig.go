@@ -7,13 +7,14 @@ import (
 )
 
 type Config struct {
-	ServeHttp bool
-	PortHttp  string
-	ServeHttps bool
-	PortHttps string
-	CertFile string
-	KeyFile string
-	Files []string
+	ServeHttp     bool
+	PortHttp      string
+	ServeHttps    bool
+	PortHttps     string
+	HttpsRedirect string
+	CertFile      string
+	KeyFile       string
+	Files       []string
 }
 
 func Read(file string) Config {
