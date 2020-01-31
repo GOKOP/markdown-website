@@ -70,7 +70,7 @@ func (red HttpsRedirect) handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	target := "https://" + host + ":" + red.HttpsPort + r.URL.Path
-	http.Redirect(w, r, target, http.StatusPermanentRedirect) // 307
+	http.Redirect(w, r, target, http.StatusPermanentRedirect)
 }
 
 func RedirectToHttps(httpPort string, httpsPort string, wait *sync.WaitGroup) {
