@@ -95,7 +95,7 @@ article p {
 	text-align: justify;
 }
 
-article blockquote {
+article blockquote, pre {
 	background-color: #ddd;
 	padding: 0.5em 1em 0.5em 1em;
 	border-radius: 0.5em;
@@ -125,9 +125,9 @@ article blockquote {
 		height: auto;
 	}
 
-	article blockquote, article pre {
+	article blockquote, pre {
 		box-sizing: border-box;
-		margin: auto;
+		margin: 1% auto 1% auto;
 		width: 100%;
 	}
 
