@@ -1,6 +1,6 @@
 # markdown-website
 
-*current version is 1.1*
+*current version is 1.2*
 
 markdown-website is a simple webserver serving a very minimalistic website based on markdown files.
 The website is generated on request from a template so modifying it boils down to editing .md files.
@@ -15,8 +15,9 @@ The website is generated on request from a template so modifying it boils down t
 	(to avoid unnecessary vulnerabilites)
 	so this program is not a very good option if you want image galeries or something like that.
 * **HTTPS** - you can serve your website on HTTP, HTTPS, both or neither.
-	If you choose to only serve on HTTPS, HTTP port will be used to redirect connections to HTTPS.
 	If you choose neither then the program will exit.
+	If you only enable HTTPS connections you can choose to redirect HTTP traffic to HTTPS with status either 301 or 302.
+	You can also choose not to.
 
 ## Planned features
 
