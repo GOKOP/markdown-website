@@ -51,6 +51,21 @@ func (page *Page) setError() {
 	page.Content = "<h1>An error ocurred while retreiving contents of this page</h1>"
 }
 
+func (page *Page) indexToTop() {
+
+	newEntries := []MenuEntry{}
+
+	for i, entry := range page.Menu {
+		if entry.Dest == "index" {
+			newEntries = append([]MenuEntry{page.Menu[i]}, page.Menu[:i]...)
+			newEntries = append(newEntries, page.Menu[i+1:]...)
+			break;
+		}
+	}
+
+	page.Menu = newEntries
+}
+
 func readTitle(path string) (string, error) {
 
 	file, err := os.Open(path)
@@ -86,21 +101,6 @@ func readContent(path string) ([]byte, error) {
 	content    =  content[ endOfTitle+1 :]
 
 	return content, nil
-}
-
-func (page *Page) indexToTop() {
-
-	newEntries := []MenuEntry{}
-
-	for i, entry := range page.Menu {
-		if entry.Dest == "index" {
-			newEntries = append([]MenuEntry{page.Menu[i]}, page.Menu[:i]...)
-			newEntries = append(newEntries, page.Menu[i+1:]...)
-			break;
-		}
-	}
-
-	page.Menu = newEntries
 }
 
 func Get(name string) Page {
