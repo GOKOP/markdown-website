@@ -14,7 +14,6 @@ type Config struct {
 	HttpsRedirect string
 	CertFile      string
 	KeyFile       string
-	Files       []string
 }
 
 func Read(file string) Config {
