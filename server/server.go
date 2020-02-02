@@ -8,6 +8,8 @@ import (
 	"log"
 	"fmt"
 	"sync"
+	"os"
+	"path/filepath"
 	"github.com/GOKOP/markdown-website/sitedata"
 )
 
@@ -32,19 +34,33 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 	templ.Execute(w, page)
 }
 
-func createFileHandlers(files []string) {
+func createFileHandlers() {
 
-	for _,file := range files {
-		http.HandleFunc("/"+file, func(w http.ResponseWriter, r *http.Request) {
-			http.ServeFile(w, r, "files/"+file)
+	err := filepath.Walk("files", func(path string, info os.FileInfo, err error) error {
+
+		if err != nil {
+			return err
+		}
+
+		if info.IsDir() {
+			return nil
+		}
+
+		http.HandleFunc("/"+filepath.Base(path), func(w http.ResponseWriter, r *http.Request) {
+			http.ServeFile(w, r, path)
 		})
+
+		return nil
+	})
+
+	if err != nil {
+		log.Fatal("Failed to set handlers for static files: ", err)
 	}
 }
-
-func HandlerSetup(files []string) {
+func HandlerSetup() {
 
 	http.HandleFunc("/", mainHandler)
-	createFileHandlers(files)
+	createFileHandlers()
 }
 
 type HttpsRedirect struct {

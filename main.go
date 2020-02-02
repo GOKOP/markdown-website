@@ -10,7 +10,7 @@ func main() {
 
 	config := siteconfig.Read("config.yaml")
 
-	server.HandlerSetup(config.Files)
+	server.HandlerSetup()
 
 	var wait sync.WaitGroup
 
