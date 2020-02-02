@@ -11,9 +11,3 @@ httpsredirect: temporary
 # TLS certificate for HTTPS
 certfile: 
 keyfile: 
-
-# Files that you want to serve in addition to the generated html;
-# they should be in the files folder.
-# They will be served on the root of the website.
-files:
-    - style.css
