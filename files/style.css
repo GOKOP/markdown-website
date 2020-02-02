@@ -102,7 +102,6 @@ article blockquote, pre {
 	background-color: #ddd;
 	padding: 0.5em 1em 0.5em 1em;
 	margin-left: 0;
-	border-radius: 0.5em;
 }
 
 @media only screen and (max-width: 48em) {
