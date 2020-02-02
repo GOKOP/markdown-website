@@ -88,19 +88,19 @@ func readContent(path string) ([]byte, error) {
 	return content, nil
 }
 
-func indexToTop(entries []MenuEntry) []MenuEntry {
+func (page *Page) indexToTop() {
 
 	newEntries := []MenuEntry{}
 
-	for i, entry := range entries {
+	for i, entry := range page.Menu {
 		if entry.Dest == "index" {
-			newEntries = append([]MenuEntry{entries[i]}, entries[:i]...)
-			newEntries = append(newEntries, entries[i+1:]...)
+			newEntries = append([]MenuEntry{page.Menu[i]}, page.Menu[:i]...)
+			newEntries = append(newEntries, page.Menu[i+1:]...)
 			break;
 		}
 	}
 
-	return newEntries
+	page.Menu = newEntries
 }
 
 func Get(name string) Page {
@@ -146,6 +146,7 @@ func Get(name string) Page {
 		log.Print(err)
 	}
 
-	page.Menu = indexToTop(page.Menu)
+	page.indexToTop()
+
 	return page
 }
