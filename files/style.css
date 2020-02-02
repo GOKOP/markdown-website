@@ -97,8 +97,11 @@ article p {
 }
 
 article blockquote, pre {
+	box-sizing: border-box;
+	width: 100%;
 	background-color: #ddd;
 	padding: 0.5em 1em 0.5em 1em;
+	margin-left: 0;
 	border-radius: 0.5em;
 }
 
