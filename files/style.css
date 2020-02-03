@@ -24,6 +24,7 @@ nav {
 	padding: 3% 0 3% 0;
 	font-size: 1.6em;
 	flex-grow: 1;
+	position: relative;
 }
 
 article {
@@ -53,6 +54,25 @@ footer {
 	text-align: center;
 	line-height: 8em;
 	font-size: 0.9em;
+}
+
+.auto-ad {
+	position: absolute;
+	bottom: 0;
+	box-sizing: border-box;
+	font-size: 0.4em;
+	width: 100%;
+	text-align: center;
+	padding: 1em;
+	align-self: flex-end;
+}
+
+.auto-ad a {
+	color: inherit;
+}
+
+.auto-ad a:hover {
+	color: #ddd;
 }
 
 nav ul {
