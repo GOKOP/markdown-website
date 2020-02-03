@@ -73,6 +73,10 @@ nav li:hover {
 	background-color: #444;
 }
 
+nav .current {
+	background-color: #444;
+}
+
 nav li a {
 	display: inline-block;
 	text-decoration: none;

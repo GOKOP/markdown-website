@@ -12,8 +12,9 @@ import (
 )
 
 type MenuEntry struct {
-	Title string
-	Dest  string
+	Title   string
+	Dest    string
+	Current bool
 }
 
 type Page struct {
@@ -22,11 +23,12 @@ type Page struct {
 	Menu []MenuEntry
 }
 
-func (page *Page) addMenuEntry(title string, path string) {
+func (page *Page) addMenuEntry(title string, path string, current bool) {
 
 	entry := MenuEntry {
-		Title: strings.TrimRight(title, "\n"),
-		Dest:  strings.TrimSuffix( filepath.Base(path), ".md" ),
+		Title:   strings.TrimRight(title, "\n"),
+		Dest:    strings.TrimSuffix( filepath.Base(path), ".md" ),
+		Current: current,
 	}
 
 	page.Menu = append(page.Menu, entry)
@@ -129,7 +131,7 @@ func Get(name string) Page {
 		title, err := readTitle(path)
 
 		if err == nil {
-			page.addMenuEntry(title, path)
+			page.addMenuEntry(title, path, targetPage)
 
 			if targetPage {
 				page.setData(title, path)

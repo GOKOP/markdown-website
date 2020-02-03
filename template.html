@@ -11,7 +11,9 @@
 			<nav>
 				<ul>
 					{{range .Menu}}
-						<li><a href="{{.Dest}}" />{{.Title}}</a></li>
+						{{if .Current}}<li class="current"><a href="{{.Dest}}" />{{.Title}}</a></li>
+						{{else}}<li><a href="{{.Dest}}" />{{.Title}}</a></li>
+						{{end}}
 					{{end}}
 				</ul>
 			</nav>
